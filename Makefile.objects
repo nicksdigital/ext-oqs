@@ -1,0 +1,9 @@
+-include oqs.dep
+oqs.lo: /home/parallels/Desktop/php-ext-oqs/ext-oqs/oqs.c
+	$(LIBTOOL) --mode=compile $(CC) -I. -I/home/parallels/Desktop/php-ext-oqs/ext-oqs $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)   -DZEND_COMPILE_DL_EXT=1 -c /home/parallels/Desktop/php-ext-oqs/ext-oqs/oqs.c -o oqs.lo  -MMD -MF oqs.dep -MT oqs.lo
+$(phplibdir)/oqs.la: ./oqs.la
+	$(LIBTOOL) --mode=install cp ./oqs.la $(phplibdir)
+
+./oqs.la: $(shared_objects_oqs) $(OQS_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) -shared $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS)  -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_oqs) $(OQS_SHARED_LIBADD)
+
